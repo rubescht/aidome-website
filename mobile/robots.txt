@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://aidome.com.au/sitemap.xml
