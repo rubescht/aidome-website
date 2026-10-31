@@ -1,0 +1,118 @@
+/* AI Dome — 3D depth layer
+   Adds lighting, layered shadows, tilt, floating art and a perspective grid.
+   Loaded after styles.css. Motion is switched off for prefers-reduced-motion. */
+
+:root{
+  --d-edge:inset 0 1px 0 rgba(255,255,255,.07), inset 0 -1px 0 rgba(0,0,0,.35);
+  --d-shadow:0 1px 0 rgba(255,255,255,.03), 0 10px 24px -8px rgba(5,2,12,.65), 0 30px 60px -24px rgba(40,20,90,.55);
+  --d-shadow-hi:0 1px 0 rgba(255,255,255,.05), 0 18px 36px -10px rgba(5,2,12,.7), 0 44px 90px -28px rgba(124,108,242,.55);
+  --d-face:linear-gradient(160deg,rgba(255,255,255,.055) 0%,rgba(255,255,255,0) 38%),linear-gradient(180deg,#2A2142 0%,#211A35 100%);
+}
+
+/* ---------- Ambient depth: aurora light + starfield behind everything ---------- */
+body{position:relative;isolation:isolate}
+body::before{content:"";position:fixed;inset:-20vmax;z-index:-2;pointer-events:none;
+  background:
+    radial-gradient(40vmax 30vmax at 12% 8%,rgba(124,108,242,.20),transparent 60%),
+    radial-gradient(36vmax 28vmax at 92% 22%,rgba(184,60,144,.16),transparent 62%),
+    radial-gradient(50vmax 40vmax at 50% 110%,rgba(75,63,168,.22),transparent 60%);
+  animation:aurora 26s ease-in-out infinite alternate}
+body::after{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.55;
+  background-image:
+    radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.55),transparent 60%),
+    radial-gradient(1px 1px at 70% 12%,rgba(255,255,255,.4),transparent 60%),
+    radial-gradient(1.5px 1.5px at 84% 64%,rgba(242,166,216,.5),transparent 60%),
+    radial-gradient(1px 1px at 35% 80%,rgba(143,162,255,.5),transparent 60%),
+    radial-gradient(1px 1px at 55% 45%,rgba(255,255,255,.3),transparent 60%);
+  background-size:520px 520px}
+@keyframes aurora{0%{transform:translate3d(0,0,0) rotate(0)}100%{transform:translate3d(-3vmax,2vmax,0) rotate(6deg)}}
+
+/* ---------- Header: frosted glass floating above content ---------- */
+.site-header,header.site{backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);
+  box-shadow:0 1px 0 rgba(255,255,255,.04),0 12px 30px -18px rgba(0,0,0,.8)}
+.brand img{filter:drop-shadow(0 4px 14px rgba(124,108,242,.35))}
+
+/* ---------- Hero: perspective grid floor + floating dome ---------- */
+.hero{position:relative;perspective:1200px}
+.hero::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:300px;z-index:-1;pointer-events:none;
+  transform:rotateX(72deg);transform-origin:50% 100%;
+  background-image:linear-gradient(rgba(124,108,242,.28) 1px,transparent 1px),linear-gradient(90deg,rgba(124,108,242,.28) 1px,transparent 1px);
+  background-size:56px 56px;
+  -webkit-mask-image:radial-gradient(ellipse 50% 70% at 50% 100%,#000 25%,transparent 75%);
+          mask-image:radial-gradient(ellipse 50% 70% at 50% 100%,#000 25%,transparent 75%);
+  animation:gridflow 6s linear infinite}
+@keyframes gridflow{to{background-position:0 56px,0 0}}
+.hero h1{text-shadow:0 2px 0 rgba(0,0,0,.35),0 14px 40px rgba(124,108,242,.35)}
+.hero-art{position:relative;transform-style:preserve-3d}
+.hero-art img{position:relative;z-index:1;animation:float 7s ease-in-out infinite;
+  filter:drop-shadow(0 30px 50px rgba(75,63,168,.55)) drop-shadow(0 0 30px rgba(184,60,144,.25));
+  transform:translate3d(var(--px,0),var(--py,0),0) rotateX(var(--rx,0)) rotateY(var(--ry,0));transition:transform .25s ease-out}
+.hero-art::after{content:"";position:absolute;left:12%;right:12%;bottom:-6%;height:14%;z-index:0;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(124,108,242,.55),rgba(184,60,144,.18) 60%,transparent);
+  filter:blur(10px);animation:shadowpulse 7s ease-in-out infinite}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -14px}}
+@keyframes shadowpulse{0%,100%{transform:scaleX(1);opacity:.9}50%{transform:scaleX(.86);opacity:.6}}
+
+/* ---------- Cards: lit top face, layered shadow, gradient rim, tilt ---------- */
+.card,.seg,.person,.track,.eq-tile,.kpi{
+  position:relative;background:var(--d-face);box-shadow:var(--d-edge),var(--d-shadow);
+  transform-style:preserve-3d;transition:transform .35s cubic-bezier(.2,.7,.2,1),box-shadow .35s ease,border-color .35s ease;will-change:transform}
+.card.hot{background:linear-gradient(160deg,rgba(242,166,216,.10) 0%,rgba(255,255,255,0) 40%),linear-gradient(180deg,#36203F 0%,#291931 100%)}
+/* gradient rim */
+.card::before,.seg::before,.person::before,.eq-tile::before,.price::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;pointer-events:none;
+  background:linear-gradient(140deg,rgba(143,162,255,.55),rgba(124,108,242,.08) 35%,rgba(184,60,144,.08) 65%,rgba(242,166,216,.5));
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.55;transition:opacity .35s}
+/* moving specular highlight (position set by depth.js) */
+.card::after,.seg::after,.person::after,.eq-tile::after,.price::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;
+  background:radial-gradient(420px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.10),transparent 45%);transition:opacity .35s}
+.is-tilting{box-shadow:var(--d-edge),var(--d-shadow-hi)!important}
+.is-tilting::before{opacity:1}
+.is-tilting::after{opacity:1}
+/* lift children toward the viewer while tilting */
+.is-tilting .ico,.is-tilting .p-ico,.is-tilting h3{transform:translateZ(28px)}
+.card .ico,.p-ico,.card h3,.seg h3,.person h3{transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+/* icons as raised tiles */
+.ico,.p-ico{box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 8px 18px -6px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04)}
+
+/* ---------- Buttons: pressable 3D ---------- */
+.btn{transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+.btn-pri{background:linear-gradient(180deg,#CB4EA2 0%,#B83C90 55%,#A2327E 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.28),0 4px 0 #6E1F57,0 12px 26px -8px rgba(184,60,144,.75)}
+.btn-pri:hover{background:linear-gradient(180deg,#D65CAD 0%,#C94A9F 55%,#B03A8A 100%);transform:translateY(-2px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.3),0 6px 0 #6E1F57,0 18px 34px -8px rgba(184,60,144,.85)}
+.btn-pri:active{transform:translateY(3px);box-shadow:inset 0 1px 0 rgba(255,255,255,.2),0 1px 0 #6E1F57,0 6px 14px -6px rgba(184,60,144,.6)}
+.btn-ghost{background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.01));box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 8px 20px -10px rgba(0,0,0,.7)}
+.btn-ghost:hover{transform:translateY(-2px)}
+
+/* ---------- Media & diagrams: framed screens with depth ---------- */
+.media{border-radius:var(--radius);box-shadow:0 0 0 1px rgba(143,162,255,.18),0 30px 60px -25px rgba(0,0,0,.9),0 50px 100px -40px rgba(124,108,242,.5);
+  transform:perspective(1400px) rotateY(var(--ry,0deg)) rotateX(var(--rx,0deg));transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.feature:nth-of-type(odd) .media{--ry:-4deg;--rx:2deg}
+.feature:nth-of-type(even) .media{--ry:4deg;--rx:2deg}
+.feature:hover .media{--ry:0deg;--rx:0deg}
+.dome-hero{perspective:1600px}
+.dome-hero img{transform:rotateX(var(--dx,8deg)) scale(var(--ds,.96));transform-origin:50% 100%;transition:transform .2s linear;
+  filter:drop-shadow(0 40px 60px rgba(90,60,255,.35)) drop-shadow(0 0 40px rgba(184,60,144,.2))}
+
+/* section headings get a soft extrusion */
+h2{text-shadow:0 1px 0 rgba(0,0,0,.4),0 10px 30px rgba(124,108,242,.22)}
+
+/* ---------- Scroll reveal: panels rise up out of the page ---------- */
+.reveal{opacity:0;transform:perspective(1000px) translate3d(0,40px,-60px) rotateX(10deg);transition:opacity .8s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* ---------- Touch & small screens: keep depth, drop heavy effects ---------- */
+@media (hover:none),(max-width:760px){
+  .feature .media{--ry:0deg;--rx:0deg}
+  .hero::after{height:220px;background-size:40px 40px}
+}
+@media (max-width:520px){
+  .hero-art::after{bottom:-3%}
+  body::after{background-size:380px 380px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  body::before,.hero::after,.hero-art img,.hero-art::after{animation:none}
+  .reveal{opacity:1;transform:none;transition:none}
+  .card,.seg,.person,.track,.eq-tile,.kpi,.price,.btn,.media,.dome-hero img{transition:none}
+}

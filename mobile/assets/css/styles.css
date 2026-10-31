@@ -455,3 +455,4 @@ p{margin:0}
 .dome-hero{margin:clamp(8px,2vw,16px) auto 0;max-width:980px}
 .dome-hero img{display:block;width:100%;height:auto;filter:drop-shadow(0 20px 60px rgba(90,60,255,.25))}
 .dome-hero .legend{max-width:820px;margin:18px auto 0}
+.swap.stack{display:flex!important;flex-direction:column;gap:8px}.swap.stack>div{flex:1 1 auto}.swap.stack .arrow{align-self:center}
