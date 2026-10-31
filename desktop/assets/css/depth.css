@@ -124,3 +124,4 @@ h2{text-shadow:0 1px 0 rgba(0,0,0,.4),0 10px 30px rgba(124,108,242,.22)}
   .reveal{opacity:1;transform:none;transition:none}
   .card,.seg,.person,.track,.eq-tile,.kpi,.price,.btn,.media,.dome-hero img{transition:none}
 }
+.band{background:rgba(29,22,48,.8)}
