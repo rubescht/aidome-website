@@ -157,6 +157,17 @@
 <div class="vs-row" role="row"><div class="k" role="rowheader">Accountability</div><div class="them" role="cell"><svg class="icon" aria-hidden="true"><use href="#i-x"></use></svg>Several suppliers</div><div class="us" role="cell"><svg class="icon" aria-hidden="true"><use href="#i-check"></use></svg>One group, one contact</div></div>
 </div>
 
+
+<div class="tryit card" id="try-guardrails">
+<div class="tryit-head"><div><p class="eyebrow" style="margin-bottom:6px">Try it yourself</p><h3>See what the guardrails catch.</h3><p class="tryit-sub">Type or paste a prompt with made-up details. Watch what would reach the AI model.</p></div><span class="live-dot" aria-hidden="true">Live demo</span></div>
+<div class="tryit-grid">
+<div class="tryit-pane"><label for="g-in" class="pane-k">What your staff type</label><textarea id="g-in" rows="6" spellcheck="false">Hi, please draft a refund email to Sarah Nguyen (sarah.nguyen@example.com, 0412 345 678). Her card 4111 1111 1111 1111 was charged twice. TFN 123 456 782 is on file.</textarea>
+<div class="chips-row"><button type="button" class="mini-btn" data-sample="0">Customer email</button><button type="button" class="mini-btn" data-sample="1">HR note</button><button type="button" class="mini-btn" data-sample="2">Finance query</button></div></div>
+<div class="tryit-arrow" aria-hidden="true"><svg class="icon" aria-hidden="true"><use href="#i-shield"></use></svg></div>
+<div class="tryit-pane out"><span class="pane-k">What the AI model receives</span><div id="g-out" class="g-out" aria-live="polite"></div><div class="g-tally" id="g-tally"></div></div>
+</div>
+<p class="src" style="margin-top:14px">Demonstration only. It runs in your browser and nothing you type is sent anywhere. The AIdome platform detects many more data types, in real time.</p>
+</div>
 <div style="margin-top:clamp(48px,7vw,88px)">
 <div class="feature">
 <div class="media"><video controls muted playsinline loop preload="none" poster="assets/video/strikeforce-guardrails.jpg" aria-label="Animated example of the GenAI firewall removing personal data from a prompt" data-autoplay><source src="assets/video/strikeforce-guardrails.mp4" type="video/mp4"></video></div>
@@ -191,6 +202,22 @@
 <div class="card" style="padding:16px"><div class="swap stack"><div class="was"><small>Before</small>Free AI tools with client data</div><span class="arrow"><svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg></span><div class="now"><small>With AI Dome</small>Approved, secure tools</div></div></div>
 </div>
 <p class="src center">Source: Federal Reserve Bank of St. Louis, Real-Time Population Survey (US workers).</p>
+<div class="calc card" id="calculator">
+<div class="calc-in">
+<p class="eyebrow" style="margin-bottom:6px">Time-back calculator</p><h3>What could AI give back to your team?</h3>
+<div class="rng"><label for="c-staff">People who use a computer at work <output id="o-staff">25</output></label><input type="range" id="c-staff" min="1" max="500" value="25"></div>
+<div class="rng"><label for="c-hours">Hours saved per person, per week <output id="o-hours">3</output></label><input type="range" id="c-hours" min="1" max="8" step="0.5" value="3"></div>
+<div class="rng"><label for="c-rate">Average cost per hour (A$) <output id="o-rate">$55</output></label><input type="range" id="c-rate" min="30" max="150" step="5" value="55"></div>
+</div>
+<div class="calc-out" aria-live="polite">
+<div class="big"><b id="r-hours">3,450</b><span>hours back each year</span></div>
+<div class="big hot"><b id="r-value">A$189,750</b><span>of time redirected each year</span></div>
+<div class="big"><b id="r-fte">2.1</b><span>full-time people’s worth of time</span></div>
+<p class="calc-pkg">Suggested start: <a href="#pricing" id="r-pkg">Growth</a></p>
+<p class="src" style="margin:0">Estimate only, based on 46 working weeks and 1,656 hours per full-time person. Your discovery session sets real targets.</p>
+</div>
+</div>
+
 </div>
 </section>
 
@@ -271,6 +298,7 @@
 </footer>
 <script src="assets/js/main.js" defer></script>
 <script src="assets/js/depth.js" defer></script>
+<script src="assets/js/tools.js" defer></script>
 <script src="assets/js/network.js" defer></script>
 </body>
 </html>
