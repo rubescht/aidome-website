@@ -65,3 +65,17 @@
     calc();
   }
 })();
+/* Hero explainer video: pause/play + full screen */
+(function () {
+  var fr = document.querySelector('.hv-frame'); if (!fr) return;
+  var v = fr.querySelector('video'), tb = fr.querySelector('[data-hv="toggle"]'), fb = fr.querySelector('[data-hv="full"]');
+  var sync = function () { var p = v.paused; fr.classList.toggle('paused', p); tb.setAttribute('aria-label', p ? 'Play animation' : 'Pause animation'); };
+  v.addEventListener('play', sync); v.addEventListener('pause', sync);
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); }
+  sync();
+  tb.addEventListener('click', function () { if (v.paused) { v.dataset.userPaused = ''; var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); } else v.pause(); });
+  fb.addEventListener('click', function () {
+    var el = v; if (el.requestFullscreen) el.requestFullscreen(); else if (el.webkitEnterFullscreen) el.webkitEnterFullscreen(); else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+    var pr = v.play(); if (pr && pr.catch) pr.catch(function () {});
+  });
+})();
