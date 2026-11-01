@@ -547,3 +547,12 @@ p{margin:0}
 .own-i .icon{width:22px;height:22px}
 @media (max-width:760px){.own{grid-template-columns:1fr;justify-items:center}.own-hub{width:170px;height:170px}.own-grid{width:100%}}
 @media (max-width:480px){.own-grid{grid-template-columns:1fr}}
+/* header logo with turning dome */
+.logo-spin{position:relative;display:block;height:42px}
+.logo-spin img{height:100%!important;width:auto;display:block}
+.logo-spin .ls-cv,.logo-spin .ls-over{position:absolute;opacity:0;transition:opacity .4s}
+.logo-spin .ls-over{left:0;top:0}
+.logo-spin .ls-cv{left:5.51%;top:12.4%;width:45.97%;height:83.66%}
+.logo-spin.on .ls-cv,.logo-spin.on .ls-over{opacity:1}
+@media (max-width:380px){.logo-spin{height:34px}}
+.foot-grid .logo-spin{height:54px}

@@ -125,12 +125,13 @@ body.is-mobile .row .btn{flex:1 1 100%}
 body.is-mobile header img{height:34px}
 
 @media print{body{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.logo-spin{position:relative;display:block;height:40px}.logo-spin img{height:100%!important;width:auto;display:block}.logo-spin .ls-cv,.logo-spin .ls-over{position:absolute}.logo-spin .ls-over{left:0;top:0;opacity:0}.logo-spin .ls-cv{left:5.51%;top:12.4%;width:45.97%;height:83.66%;opacity:0}.logo-spin.on .ls-cv,.logo-spin.on .ls-over{opacity:1}body.is-mobile .logo-spin{height:34px}
 </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <a href="#" data-link="website" aria-label="AI Dome home"><img src="assets/img/aidome-logo-h.png" srcset="assets/img/aidome-logo-h.png 1x, assets/img/aidome-logo-h@2x.png 2x" width="155" height="42" alt="AI Dome"></a>
+    <a href="#" data-link="website" aria-label="AI Dome home"><span class="logo-spin" data-geo="144.81,132.58,116.76,115.44,508,138"><img class="ls-base" src="assets/img/aidome-logo-h.png" srcset="assets/img/aidome-logo-h.png 1x, assets/img/aidome-logo-h@2x.png 2x" width="155" height="42" alt="AI Dome"><canvas class="ls-cv" aria-hidden="true"></canvas><img class="ls-over" src="assets/img/aidome-logo-h-over.png" srcset="assets/img/aidome-logo-h-over.png 1x, assets/img/aidome-logo-h-over@2x.png 2x" width="155" height="42" alt="" aria-hidden="true"></span></a>
     <a href="#" data-link="website" class="back">Back to website</a>
   </div>
 </header>
@@ -427,5 +428,6 @@ if (MQ && MQ.addEventListener) MQ.addEventListener('change', function () { if (!
 render();
 </script>
 <script src="assets/js/network.js" defer></script>
+<script src="assets/js/logo-spin.js" defer></script>
 </body>
 </html>
