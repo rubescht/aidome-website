@@ -584,10 +584,10 @@ p{margin:0}
   .hero .btns .btn-ghost{border:0;background:none;box-shadow:none;min-height:44px;font-size:16px;color:var(--soft)}
   .hero .btns .btn-ghost:hover{transform:none;color:#fff}
   /* sticky call-to-action bar once the hero has scrolled away */
-  .m-cta{display:flex;gap:10px;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;padding:8px;border-radius:18px;background:rgba(22,15,25,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line-strong);box-shadow:0 16px 40px -10px rgba(0,0,0,.9);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+  .m-cta{display:flex;gap:10px;position:fixed;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:30;padding:7px;border-radius:999px;background:rgba(22,15,25,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid var(--line-strong);box-shadow:0 16px 40px -10px rgba(0,0,0,.9);transform:translateY(140%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
   .m-cta.show{transform:none}
   .m-cta .btn{flex:1;min-height:48px}
-  .m-call{width:52px;flex:0 0 52px;border-radius:12px;display:grid;place-items:center;border:1px solid var(--line-strong);color:#fff}
+  .m-call{width:48px;height:48px;flex:0 0 48px;border-radius:50%;display:grid;place-items:center;border:1px solid var(--line-strong);color:#fff}
   .m-call svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
   .site-footer{padding-bottom:96px}
 }
