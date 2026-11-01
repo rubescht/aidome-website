@@ -14,7 +14,8 @@
   var size = function () {
     dpr = Math.min(window.devicePixelRatio || 1, 2); W = window.innerWidth; H = window.innerHeight;
     cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr); ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    var small = W < 640, target = Math.round(Math.min(small ? 38 : 85, (W * H) / (small ? 9000 : 16000)));
+    var small = W < 640, target = Math.round(Math.min(small ? 24 : 85, (W * H) / (small ? 12000 : 16000)));
+    cv.style.opacity = small ? '.45' : '.7';
     LINK = small ? 110 : 150;
     while (nodes.length < target) nodes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .28, vy: (Math.random() - .5) * .28, r: 1.2 + Math.random() * 1.8, hot: Math.random() < .14 });
     nodes.length = target;
